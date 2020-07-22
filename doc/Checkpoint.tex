@@ -1,0 +1,44 @@
+
+\documentclass[11pt]{article}
+\usepackage{UF_FRED_paper_style}
+
+\usepackage{lipsum}
+
+\onehalfspacing
+
+
+\setlength{\droptitle}{-5em}
+
+\begin{document}
+    \title{ARM Checkpoint Report}
+
+    \author{Group 10\\\\Ruxandra Teodora Fleseriu, Cristina Gabriela Tirsi, \\\\Andrei Petridean, Vlad Nicolaescu}
+
+
+    \date{\today}
+    \maketitle
+
+
+    \section{Group organisation}
+    \hspace*{0.8cm}After studying the specification in detail individually, we all discussed what should we start with. We established that the most important step would be to make sure that we can run the tests. It took us a whole day to make this work for all of us because we all ran them on different operating systems. Then, we worked together again on the main function of the emulator and developed a strategic plan. Noticing we have 4 different tasks to accomplish, we split into 2 pairs.
+    \\\hspace*{0.8cm}Cristina and Ruxandra worked on the ”Data Processing” and ”Single Data Transfer” instructions. Vlad and Andrei worked on the ”Multiply” and ”Branch” instructions. At the end of each day, we met for a half an hour or an hour on a Zoom meeting to discuss what we have done and to merge our codes, making sure there is no problem. Also, if one pair struggled too much with a specific task, we all put our minds at work to solve that problem.
+    \\\hspace*{0.8cm}Although it was a hard and intense week, we managed to finish Part I passing all the tests on Monday, with 4 days before the deadline. This gave us time to make sure that our code and our report are on point.
+    \section{Group Performance}
+    \hspace*{0.8cm} So far, our work strategy seems to be efficient and we enjoy working this way. There is a very high level of enthusiasm and dedication in our team. We will try to keep this team spirit alive during the upcoming challenges. We think that working in pairs of two increased our productivity: each time one of us did not know how to continue the program or how to solve a bug, the other one would come up with a different approach. Also, the daily team meetings made us have a more clear vision of what we have to do and also made us more driven to achieve our goals.
+    \section{Emulator Structure}
+    \hspace*{0.8cm}
+    We split the emulator into multiple files:
+    \begin{itemize}
+        \item emulate.c: Here we have the "main" function (where we just call all the emulator-related functions) and the "pipeline" function (updates the state, decodes, fetches and executes the instructions and update the program counter).
+        \item decoder.c: contains a function that decodes each type of instruction
+        \item data\_processing.c, multiply.c, single\_data\_transfer.c, branch.c: program for each instruction type
+        \item processes.c: contains the fetch, decode and execute functions
+        \item instructions\_utils.c: functions that are useful for the instructions
+        \item utils.c: useful constants and functions that are used multiple times along the processes
+        \item structures.h: it is not in the emulator folder because we are going to use it for the Assembler part too; it contains all the data structures
+    \end{itemize}
+    \\\hspace*{0.8cm}We decided to structure our project in this way to make sure that our code is fluent and is written in a readable manner.
+    \section{Future Challenges}
+    \hspace*{0.8cm} Noticing the efficiency of our work strategy we would like to keep it this way for the second part of the project. We do not have a clear idea of what we are going to do for the extension yet, but we think we are going to figure it out after we complete part 2. Also, we think that we can make some improvements in dealing with anger because we tend to develop a bad temper due to unsolved bugs. We need to learn to take a break and then have a fresh look on the issue.
+
+\end{document}

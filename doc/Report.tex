@@ -1,0 +1,72 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+
+\title{C Project Final Report}
+
+\author{Cristina-Gabriela Tirsi, Ruxandra-Teodora Fleseriu,\\Vlad-Ioan Nicolaescu, Andrei Petridean}
+
+\date{June, 2020}
+
+\begin{document}
+    \maketitle
+
+    \section{Assembler}
+
+    The role of the Assembler part of the project is to transform an ARM 11 assembler code to a binary file. Even though ARM 11 memory is structured in bytes, our memory array stores groups of four bytes, as in most functions it is easier to work this way given that instructions are four bytes long.?We had some problems with implementing load and store using this kind of memory structure and we thought of changing it, but we decided to make a tradeoff and keep on going this way. Hence, we implemented load and store in a “special” way.
+
+\subsection{Structure of Assembler}
+
+\begin{itemize}
+\item \textbf{assemble.c}: We map the keyword from each line to the function pointer of its corresponding type. Then, we call that function, giving the state of the argument. For this to work, all functions in the symbol table need to have the same type:
+\item \textbf{file\_utils.c}: contains different useful functions related to reading from a file
+\item \textbf{symbol\_table.c}: maps into a table each instruction to its type
+\item \textbf{hashmap.c}: We thought it would be elegant to use function pointers. So we decided to map the keywords to them, using a hashmap. However, these kind of structures are not included in the C standard library, so we had to implement one ourselves.?We did some research on this and found a header(hashmap.h), that provides similar functionalities as the <map> library in C++ and decided to include it in our project. Also, we included an external hashing function.
+\item \textbf{branch.c, multiply.c, data\_processing.c, single\_data\_transfer\_assembler.c}: contains the necessary functions for converting the branch, multiply, data\_processing and single\_data\_transfer instructions to hex
+\item \textbf{assembler\_utils.c}: contains the necessary functions for converting the utils intructions to hex
+\end{itemize}
+\subsection{Work management}
+
+As we have seen in the Emulator part that we are highly productive working in teams of two, we decided to continue in this way in the following parts. Ruxandra and Vlad worked together on the hashmap.c/.h, the main from assembler.c, file\_utils.c and symbol\_table.c, while Andrei and Cristina worked together on the conversion of the instructions to hex (branch.c/.h, multiply.c/.h, data\_processing.c/.h, single\_data\_tansfer.c/.h).
+\\
+\\To make sure everything works as effective as it can be, at the end of each day we were gathering at a Zoom meeting to discuss what we should do next and take a look on what we've done during the previous day. This way we could see on what we have to work a little bit more, but also what are our strong points.
+\\
+\\Also, at the end, because we were running out of time, Andrei and Ruxandra started the Extension part, while Cristina and Vlad were having hard sessions of debugging for the Assembler part.
+\subsection{Issues that we encountered}
+At the beginning we did not pay enough attention to memory leaks. As a result, after running our code multiple times when debugging, we eventually got a "buffer overflow detected" error. This has considerably slowed us down, because we could not run the code anymore. To solve this, we had to fix all memory leaks, which took some time, but we eventually managed to get it running again.
+\section{Extension}
+
+As the world traverses a period of uncertainty and loneliness all around the globe, a lot of people struggle with being isolated all the time. Even an artificial friend can be beneficial to people’s mental health. That is why we created The ChatBotter. This bot is supposed to be a friend to discuss with when you feel like you have a breakdown. Trained with M.L., the little friend is happy to talk to you for as long as you want. At this point, we only have a prototipe structured in two files: main.c and structures.h.
+
+\subsection{Chat-Bot Structure}
+\item \textbf{structures.h}: We use a record struct to get one of the three available answers for a specific type of input.
+\item \textbf{main.c/find\_match}: This function  takes the input and searches through the record “database” looking for the most   question and returns the index of this question from the database. Then value -1 is returned if there is nothing similar in the database.
+\item \textbf{main.c/main}: In this function we take the input and process it. The processing part consists in getting rid of characters that are not letters and all the unnecessary blank spaces. We also turn the remain letters into uppercase. Also, he program keeps track if a question was already asked and if the user repeats itself, it gets “angry”, but polite at the same time.
+
+\subsection{Issues that we encountered}
+Our first problem was that we were running out of time and this caused that only two of us worked on the beginning on the extension. We did not find a workable c-json library, so that made us design our own structures. As in the Assembler part, we had some memory issues. We solved them by debugging with gdb and sometimes we used prints to follow the control flow.
+
+\subsection{Future improvements}
+The ideal friend-bot will respond to a larger number of questions, such that a chat with him/her/they would be very interesting. This result could be achieved by training the robot with a lot of data using an M.L. program.
+
+\section{General Reflections}
+
+\subsection{Group Reflections}
+We are really proud of what we have accomplished with our project during the past few weeks. We think that our work-strategy, dividing the group in two pairs when working on a specific task, was highly effective. This way were two brains concentrating on the same task at the same time which made the process a lot more enjoyable and productive. Also, the almost daily meetings helped us a lot on keeping the work coherent and synchronized. We learned a lot of new things related to git, gdb and C. Also spending a lot of time together, even though remotely, made us be more open to other people's ideas, learn to collaborate, deal with temperamental problems and to be good teammates.
+
+
+\subsection{Individual Reflections}
+\item \textbf{Vlad-Ioan Nicolaescu}: I loved being part of this project and of our amazing team! I really feel that I have learned way more than I have expected. I admit that I was scared at first, as the building an assembler and an emulator is not quite an easy job. But eventually having done so, not only that I understood in detail how they work but also improved my programming skills, my ability to use git and my soft skills, working in a team. I remember when my Personal Tutor told us in the first term that there are people that write in their resume that they understand how the assembler and emulator work, but Imperial gives us the opportunity not only to say this, but also that we have built them, and I really want to thank the Departament for this. Working on this project thought me to work hard on every idea that we have, as no matter if it seems great at first or not, it can turn out the other way around. Moreover, I learned to stay calm even when there is a hidden bug in the code or it just does not work the way we want it to, maybe take a break to cool off and come back with a fresh mind, as everything will be solved much faster.
+\\
+\item  \textbf{Andrei Petridean}: I am very happy with this experience and what our team has accomplished during the last weeks. Honestly, at first, the amount of work that needed to be done intimidated me a little bit. But after we  developed a plan and started coding, it all became a really enjoyable experience, but challenging at the same time. I learned a lot of new things about programming in B, but also improved my skills using git and terminal commands. I began to adapt a lot easier to changes in code and to control my frustration when I could not fix an error exactly when I wanted to. Also, my teammates contributed a lot to making this project a great one. I worked mostly each time with at least another person and the flow of ideas was surprisingly good. Also, I think that we all developed our communication and teamwork skills.
+\\
+\item \textbf{Cristina-Gabriela Tirsi }: I must admit that when I first read the spec, I found the task very intimidating, mostly because I didn't fully understand what an emulator and an assembler does. A month later, I am proud to not only understand the meaning of them, but also to understand how to build them. I am extremely grateful for our team and how it managed to get along. Although it was a bit of a different experience not to be able to meet face to face as it was supposed to normally happen, communication was not a problem for us. I am actually very pleased to say that all the issues we had were technical, and not collaboration related. Working as a team was very helpful, because most of the times if one of us would have a really good strategy idea, but would not know how to go about implementing it, the rest of the team would come up with solutions which definitely made a difference in how effective we worked. Overall, it was a great way of learning new things, from how to use git, code in C, debug using gdb, use Valgrind, to teamwork, taking responsibility, time and stress management, and I am happy that our first year ended this way, even considering the current situation. Also, I want to compliment the Department for managing this last term very well (keeping its structure as close to original as possible and communicating well with us) and many thanks go to our mentor who gave as some really great advice and feedback on our work!
+\\
+\item \textbf{Ruxandra-Teodora Fleseriu}: I am very happy with how our group has performed, and believe that each of us made a significant contribution to the project. There is no task that we haven't split among all members, and this procedure of ours required extensive amounts of teamwork and communication. I knew I would have been up against a difficult task, but the constant presence of a group to back me up made the overall experience more than enjoyable.
+The fact that we had no skeleton or guidance on the implementation, in addition to having to coordinate our work with each other, meant that the usual way of just following the spec's suggested implementation was a milestone. We had to figure out each detail to make sure our program is working as it is supposed to.
+\end{document}
